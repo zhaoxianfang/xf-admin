@@ -37,7 +37,7 @@ class Classify extends AdminBase
     public function index()
     {
         if ($this->request->isAjax() && !$this->request->isPjax()) {
-            list($where, $sort, $order, $offset, $limit) = $this->getTableSearchParam('cc.name');
+            list($where, $sort, $order, $offset, $limit) = $this->getTableSearchParam('ac.name');
 
             $list      = $this->logicArticleClassify->getListData($where, $sort, $order, $offset, $limit);
             $countList = $this->logicArticleClassify->countListData($where);
