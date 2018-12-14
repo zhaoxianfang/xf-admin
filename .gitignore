@@ -1,0 +1,10 @@
+/.idea
+/.vscode
+#/vendor
+*.log
+thinkphp
+.env
+/config/es.php
+/config/callback.php
+/config/redis.php
+/config/database.php

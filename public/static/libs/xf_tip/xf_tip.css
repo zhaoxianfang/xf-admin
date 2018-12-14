@@ -1,0 +1,92 @@
+/**
+ * data-tip 提示样式
+ * @Author   ZhaoXianFang
+ * @DateTime 2018-12-06
+ */
+
+.tip-container {
+    position: absolute;
+    box-shadow: 2px 2px 5px #f9f9f9;
+    z-index: 999;
+    display: none;
+}
+.tip-container .tip-point-top, .tip-container .tip-point-bottom, .tip-container .tip-point-left, .tip-container .tip-point-right {
+    border: 1px solid #dcdcdc;
+    position: relative;
+    background: white;
+}
+.tip-content {
+    padding: 5px 10px;
+    background: white;
+    font-size: 12px;
+    line-height: 1.7;
+    font-family: "Helvetica Neue", Helvetica, Arial, "MicroSoft YaHei";
+}
+.tip-container .tip-point-top::after, .tip-container .tip-point-top::before, .tip-container .tip-point-bottom::after, .tip-container .tip-point-bottom::before {
+    content: "";
+    position: absolute;
+    border: solid transparent;
+    left: 50%;
+    width: 0;
+    height: 0;
+    transform: translate3d(-50%, 0, 0);
+    -webkit-transform: translate3d(-50%, 0, 0);
+}
+.tip-container .tip-point-right::after, .tip-container .tip-point-right::before, .tip-container .tip-point-left::after, .tip-container .tip-point-left::before {
+    content: "";
+    position: absolute;
+    border: solid transparent;
+    top: 50%;
+    width: 0;
+    height: 0;
+    transform: translate3d(0, -50%, 0);
+    -webkit-transform: translate3d(0, -50%, 0);
+}
+/*tip-point-top*/
+
+.tip-container .tip-point-top::after {
+    border-top-color: #fff;
+    top: 100%;
+    border-width: 5px;
+}
+.tip-container .tip-point-top::before {
+    border-top-color: #dcdcdc;
+    top: 100%;
+    border-width: 7px;
+}
+/*tip-point-bottom*/
+
+.tip-container .tip-point-bottom::after {
+    border-bottom-color: #fff;
+    bottom: 100%;
+    border-width: 5px;
+}
+.tip-container .tip-point-bottom::before {
+    border-bottom-color: #dcdcdc;
+    bottom: 100%;
+    border-width: 7px;
+}
+/*tip-point-right*/
+
+.tip-container .tip-point-right::after {
+    border-right-color: #fff;
+    right: 100%;
+    border-width: 5px;
+}
+.tip-container .tip-point-right::before {
+    border-right-color: #dcdcdc;
+    right: 100%;
+    border-width: 7px;
+}
+/*tip-point-left*/
+
+.tip-container .tip-point-left::after {
+    border-left-color: #fff;
+    left: 100%;
+    border-width: 5px;
+}
+.tip-container .tip-point-left::before {
+    border-left-color: #dcdcdc;
+    left: 100%;
+    border-width: 7px;
+}

@@ -1,0 +1,55 @@
+
+
+  <div class="main">
+    <div class="inwrap">
+      	<h2>国内省市区联动</h2>
+		<div id="city_test" class="form row">
+			<div class=" col-xs-6 col-sm-4 col-md-2">
+				<select class="province form-control" data-first-title="选择省" name="province" data-url="{:url('search',array('lv'=>1))}"></select>
+			</div>
+			<div class=" col-xs-6 col-sm-4 col-md-2">
+				<select class="city form-control" data-first-title="选择市" name="city" data-url="{:url('search',array('lv'=>2))}" ></select>
+			</div>
+			<div class=" col-xs-6 col-sm-4 col-md-2">
+				<select class="counties form-control" data-first-title="选择县区" name="counties" data-url="{:url('search',array('lv'=>3))}"></select>
+			</div>
+			<div class=" col-xs-6 col-sm-4 col-md-2">
+				<select class="town form-control" data-first-title="选择乡/镇/街道办" name="town" data-url="{:url('search',array('lv'=>4))}"></select>
+			</div>
+			<div class=" col-xs-6 col-sm-4 col-md-2">
+				<select class="village form-control " data-first-title="选择村/社区" name="village" data-url="{:url('search',array('lv'=>5))}"></select>
+			</div>
+			<!-- <select class="area" name="area" data-url="{:url('search',array('lv'=>3))}" data-json-space="data.list"></select> -->
+		</div>
+
+
+    </div>
+  </div>
+
+
+
+<script>
+	$(function () {
+	// $(document).on('pjax:complete', function() {  
+		$.cxSelect.defaults.url = "{:url('search')}";
+		$.cxSelect.defaults.jsonName = 'name';
+		$.cxSelect.defaults.jsonValue = 'value';
+		// $.cxSelect.defaults.jsonSpace = 'data';
+
+
+		$('#city_test').cxSelect({
+		  selects: ['province', 'city', 'counties','town','village']
+		});
+	 });
+
+</script>
+
+
+
+
+
+
+
+
+
+

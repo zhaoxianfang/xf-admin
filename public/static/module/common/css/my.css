@@ -1,0 +1,273 @@
+/**
+ * 绿色 皮肤
+ * @type {[type]}
+ */
+.skin-green .sidebar-menu > li:hover > a, .skin-green .sidebar-menu > li.active > a {
+    color: #fff;
+    background: #1e282c;
+    border-left-color: #18bc9c;
+}
+
+/**
+ * 蓝色 皮肤
+ * @type {[type]}
+ */
+.skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
+    color: #fff;
+    background: #1e282c;
+    border-left-color: #3c8dbc;
+}
+/**
+ * 紫色 皮肤按钮
+ */
+.skin-purple .main-header .btn{
+  background-color: #605ca8;
+}
+/* li.active > a{
+    color: #fff;
+    background: #1e282c;
+    border-left-color: #3c8dbc;
+}*/
+
+
+/**
+ *修复 select2 select框圆角的问题
+*/
+.select2-container--default .select2-selection--single ,.select2-selection .select2-selection--single {
+    border-radius: 0px!important;
+    height: 35px;
+}
+
+/**
+ * 自定义layer footer
+ */
+.layui-layer-footer{
+    background:#F7F7F7;
+}
+/*自定义layer footer btn */
+.layui-layer-btn {
+    text-align: center!important;
+}
+
+.edui-editor{
+    width: 500px!important;
+}
+
+form{
+    padding:10px;
+}
+
+
+/**
+ *  panel 和 nav-tabs 开始
+ */
+
+/*panel扩展描述样式*/
+.panel-intro {
+  margin-bottom: 0;
+  border: none;
+}
+.panel-intro > .panel-heading {
+  padding: 15px;
+  padding-bottom: 0;
+  background: #e8edf0;
+  border-color: #e8edf0;
+  position: relative;
+}
+.panel-intro > .panel-heading .panel-lead {
+  margin-bottom: 15px;
+}
+.panel-intro > .panel-heading .panel-lead em {
+  display: block;
+  font-weight: bold;
+  font-style: normal;
+}
+.panel-intro > .panel-heading .panel-title {
+  height: 25px;
+  font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.panel-intro > .panel-heading .panel-control {
+  height: 42px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+.panel-intro > .panel-heading .panel-control .fa {
+  font-size: 14px;
+}
+.panel-intro > .panel-heading .nav-tabs {
+  border-bottom: 0;
+  margin-bottom: 0;
+}
+.panel-intro > .panel-heading .nav-tabs > li > a {
+  margin-right: 4px;
+  color: #95a5a6;
+  background-color: #d8e0e6;
+  border: 1px solid #e8edf0;
+  border-bottom-color: transparent;
+}
+.panel-intro > .panel-heading .nav-tabs > li > a:hover,
+.panel-intro > .panel-heading .nav-tabs > li > a:focus {
+  border: 1px solid #e8edf0;
+  color: #7b8a8b;
+  background-color: #c9d4dc;
+}
+.panel-intro > .panel-heading .nav-tabs > li.active > a,
+.panel-intro > .panel-heading .nav-tabs > li.active > a:hover,
+.panel-intro > .panel-heading .nav-tabs > li.active > a:focus {
+  color: #7b8a8b;
+  background-color: #ffffff;
+  border-bottom-color: transparent;
+  cursor: default;
+}
+/*单表格*/
+.panel-tabs .panel-heading {
+  padding: 12px 15px 12px 15px;
+}
+.panel-tabs .panel-heading .panel-lead {
+  margin-bottom: 0px;
+}
+/*选项卡*/
+.panel-nav .panel-heading {
+  padding: 0px;
+  padding-bottom: 0;
+  background: #f1f4f6;
+  border-color: #f1f4f6;
+}
+.panel-nav .nav-tabs > li > a {
+  padding: 12px 15px;
+  background-color: #e8edf0;
+  border: 1px solid #f1f4f6;
+}
+.panel-nav .nav-tabs > li > a:hover,
+.panel-nav .nav-tabs > li > a:focus {
+  border: 1px solid #e8edf0;
+  background-color: #e8edf0;
+}
+.panel-nav .nav-tabs > li.active > a,
+.panel-nav .nav-tabs > li.active > a:hover,
+.panel-nav .nav-tabs > li.active > a:focus {
+  border-color: #f1f4f6;
+  border-bottom-color: transparent;
+}
+/*顶栏addtabs*/
+.nav-addtabs {
+  border: none;
+}
+.nav-addtabs.disable-top-badge > li > a > .pull-right-container {
+  display: none;
+}
+.nav-addtabs > li {
+  margin: 0;
+}
+.nav-addtabs > li > a {
+  height: 49px;
+  line-height: 49px;
+  padding: 0 15px;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  margin: 0;
+  color: #95a5a6;
+}
+.nav-addtabs > li > a:hover,
+.nav-addtabs > li > a:focus {
+  border: none;
+  color: #2c3e50;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+.nav-addtabs > li > a i {
+  margin-right: 3px;
+}
+.nav-addtabs > li.active > a {
+  height: 49px;
+  line-height: 49px;
+  padding: 0 15px;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  background: #f1f4f6;
+  color: #2c3e50;
+  overflow: hidden;
+}
+.nav-addtabs > li.active > a:hover,
+.nav-addtabs > li.active > a:focus {
+  border: none;
+  color: #2c3e50;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  background: #f1f4f6;
+}
+.nav-addtabs > li .close-tab {
+  font-size: 10px;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  margin-top: -7px;
+  z-index: 100;
+  cursor: hand;
+  cursor: pointer;
+  color: #fff;
+  display: none;
+}
+.nav-addtabs .open > a:hover,
+.nav-addtabs .open > a:focus {
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+}
+.nav-addtabs ul li {
+  position: relative;
+}
+.nav-addtabs li:hover > .close-tab {
+  display: block;
+}
+
+/**
+ *  panel 和 nav-tabs 结束
+ */
+
+/*bootstrap Table 时间绑定 begin*/
+.daterangepicker .ranges {
+    font-size: 11px;
+    float: none;
+    margin: 4px;
+    text-align: left;
+}
+
+.daterangepicker .ranges li {
+    font-size: 13px;
+    background-color: #f5f5f5;
+    border: 1px solid #f5f5f5;
+    border-radius: 4px;
+    color: #08c;
+    padding: 3px 12px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.daterangepicker .ranges li.active {
+    background-color: #08c;
+    border: 1px solid #08c;
+    color: #fff;
+}
+.daterangepicker .ranges ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+/*bootstrap Table 时间绑定 end*/
+
+/*字体图标离字一段小距离 begin*/
+i.fa{
+  margin-right: 5px;
+}
+/*字体图标离字一段小距离 end*/
+
+.box-body{
+  padding: 10px !important;
+}
+.fixed-table-pagination{
+  padding: 10px !important;
+}

@@ -1,0 +1,116 @@
+<div class="row">
+	<div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">权限列表</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div id="toolbar">
+                  <button class="btn btn-default btn-refresh">
+                      <i class="fa fa-refresh"></i>刷新
+                  </button>
+                  <button class="btn btn-success  btn-add">
+                    <i class="fa fa-plus"></i>添加
+                  </button>
+
+                  <button class="btn btn-success  btn-edit">
+                      <i class="fa fa-pencil"></i>编辑
+                  </button>
+
+                  <button class="btn btn-danger btn-del" data-success="" >
+                      <i class="fa fa-trash"></i>删除
+                  </button>
+              </div>
+              <table id="table" >
+              </table>
+            </div>
+            
+          <!-- /. box -->
+        </div>
+    </div>
+
+
+
+<script>
+  $(function () {
+    //初始化一些操作（非必须） 该方法一定要写在 Table.api.init 之前
+      // 初始化表格参数配置
+      Table.api.init({
+          pk:'id',
+          sortName:'id',
+          extend: {
+              index_url: 'authrule/index',
+              add_url: 'authrule/add',
+              edit_url: 'authrule/edit',
+              del_url: 'authrule/del',
+              dragsort_url:'',
+              multi_url: '',
+              text:{
+                  'add_text':'',
+                  'edit_text':''
+              }
+          }
+      });
+      var table = $('#table');
+
+      // 初始化表格
+      table.bootstrapTable({
+          url: $.fn.bootstrapTable.defaults.extend.index_url,
+          sortName:'id',
+          searchFormVisible: false, //是否始终显示搜索表单
+          commonSearch:false,
+          pagination:true,
+          search:false,
+          // showPaginationSwitch: true,
+          pageSize:1000,//每页显示条数
+          showExport:false,
+          showColumns:true,
+          columns: [
+              {field: 'state', checkbox: true,},
+              {field: 'id', title: 'ID'},
+              {field: 'title', title: '标题', align: 'left', formatter: formatter.title},
+              {field: 'icon', title: '图标', formatter: formatter.icon},
+              {field: 'name', title: '名称', align: 'left', formatter: formatter.name},
+              {field: 'weigh', title: '权重'},
+              {field: 'status', title: '状态', formatter: Table.api.formatter.status,searchList: {"1":'正常',"0":'禁用'}},
+              {
+                  field: 'ismenu',
+                  title: '菜单',
+                  align: 'center',
+                  formatter: Table.api.formatter.toggle
+              },
+              {
+                  field: 'operate',
+                  title: '操作',
+                  table: table,
+                  events: Table.api.events.operate,
+                  formatter: Table.api.formatter.operate
+              }
+          ],
+          queryParams: function (params) {
+            return params;
+          },
+      });
+            
+      // 为表格绑定事件
+      Table.api.bindevent(table);
+
+  });
+var formatter={
+  title: function (value, row, index) {
+      return !row.ismenu || row.status == 'hidden' ? "<span class='text-muted'>" + value + "</span>" : value;
+  },
+  name: function (value, row, index) {
+      return !row.ismenu || row.status == 'hidden' ? "<span class='text-muted'>" + value + "</span>" : value;
+  },
+  icon: function (value, row, index) {
+      return '<span class="' + (!row.ismenu || row.status == 'hidden' ? 'text-muted' : '') + '"><i class="' + value + '"></i></span>';
+  },
+  subnode: function (value, row, index) {
+      return '<a href="javascript:;" data-toggle="tooltip" title="' + ('Toggle sub menu') + '" data-id="' + row.id + '" data-pid="' + row.pid + '" class="btn btn-xs '
+          + (row.haschild == 1 || row.ismenu == 1 ? 'btn-success' : 'btn-default disabled') + ' btn-node-sub"><i class="fa fa-sitemap"></i></a>';
+  }
+}
+</script>

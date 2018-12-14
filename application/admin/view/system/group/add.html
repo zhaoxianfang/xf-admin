@@ -1,0 +1,159 @@
+{include file="layout/top" /}
+
+
+<!-- <div class="callout callout-success">
+    <h4>提示!</h4>
+    规则名称请仔细填写，包含大小写的区别
+</div> -->
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    
+    <div class="form-group">
+        <label for="name" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>父级组:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class="form-control select2  col-xs-12 col-sm-2" name="row[pid]" style="border-radius:0px;">
+                {volist name="grouplist" id="vo"}
+                    <option value="{$vo.id}" >&nbsp;&nbsp;{$vo.title}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="name" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>用户组名称:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="name" name="row[name]" placeholder="" value="" data-rule="required" />
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="remark" class="control-label col-xs-12 col-sm-2">权限节点:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="hidden" name="row[rules]" id="rule_node">
+            <div id="treelist" class="ztree">正在加载中...</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="remark" class="control-label col-xs-12 col-sm-2">备注:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea class="form-control" id="remark" name="row[remark]"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="content" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label>
+                <input type="radio" name="row[status]" value="1" class="flat-red" checked>
+                启用
+            </label>
+            <label>
+                <input type="radio" name="row[status]" value="0" class="flat-red">
+                停用
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        
+    </div>
+    <div class="form-group hidden layer-footer">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed ">确定</button>
+            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+        </div>
+    </div>
+</form>
+
+
+
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+
+{include file="layout/js" /}
+
+
+
+<!-- Select2 -->
+<link rel="stylesheet" href="__LIBS__/select2/dist/css/select2.min.css">
+<!-- Select2 -->
+<script src="__LIBS__/select2/dist/js/select2.full.min.js"></script>
+
+<!-- tree -->
+<link rel="stylesheet" href="__LIBS__/bootstrap-ztree3/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+<script type="text/javascript" src="__LIBS__/bootstrap-ztree3/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__LIBS__/bootstrap-ztree3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="__LIBS__/bootstrap-ztree3/js/jquery.ztree.exedit.js"></script>
+
+<script>
+    // tree
+    var setting = {
+        view: {
+            selectedMulti: false
+        },
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        edit: {
+            enable: false
+        },
+        callback:{ //回调函数  
+            onCheck: zTreeOnCheck
+        }  
+    };
+    var nodeArr = new Array();
+    var treeObj;
+
+    function zTreeOnCheck(event, treeId, treeNode) {
+        nodeArr.length = 0; //清空
+        var nodes = treeObj.getCheckedNodes(true);
+        for (var i=0, l=nodes.length; i < l; i++) {
+            nodeArr.push(nodes[i].id);
+        }
+        var checknode = nodeArr.join(",");
+        //赋值
+        $("#rule_node").val(checknode)
+    };
+    
+    $(document).ready(function(){
+        //自定义
+        var sysUrl = "{:url('gettree')}";
+        $.post(sysUrl,{},function(res){
+            if(typeof(res) == 'string') { // json 解析
+                res= JSON.parse(res);
+            }
+            if(res.status == 1){
+                // var zNodes =createNode(res.data);
+                var zNodes =res.data;
+                treeObj  = $.fn.zTree.init($("#treelist"), setting, zNodes);
+            }else{
+                layer.msg(res.info);
+            }
+        });
+        return false;  
+
+    });
+
+
+    var newCount = 1;
+   
+</script>
+<script type="text/javascript">
+
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+    })
+</script>
+</body>
+</html>

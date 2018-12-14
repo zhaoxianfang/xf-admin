@@ -1,0 +1,156 @@
+<div class="row">
+	<div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">敏感词分类</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div id="toolbar">
+                  <button class="btn btn-info btn-refresh">
+                      <i class="fa fa-refresh"></i>刷新
+                  </button>
+                  <button class="btn btn-success  btn-add">
+                    <i class="fa fa-plus"></i>添加
+                  </button>
+
+                  <button class="btn btn-success  btn-edit">
+                      <i class="fa fa-pencil"></i>编辑
+                  </button>
+
+                  <button class="btn btn-danger btn-del" data-success="" >
+                      <i class="fa fa-trash"></i>删除
+                  </button>
+              </div>
+              <table id="table" >
+              </table>
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /. box -->
+        </div>
+    </div>
+
+
+<script>
+  $(function () {
+    //初始化一些操作（非必须） 该方法一定要写在 Table.api.init 之前
+      // 初始化表格参数配置
+      Table.api.init({
+          pk:'id',
+          sortName:'id',
+          extend: {
+              index_url: 'classify/index',
+              add_url: 'classify/add',
+              edit_url: 'classify/edit',
+              del_url: 'classify/del',
+              multi_url: '',
+              text:{
+                  'add_text':'',
+                  'edit_text':''
+              }
+          }
+      });
+      var table = $('#table');
+
+      // 初始化表格
+      table.bootstrapTable({
+          url: $.fn.bootstrapTable.defaults.extend.index_url,
+          sortName:'id',
+          detailView:false,
+          searchFormVisible: false, //是否始终显示搜索表单
+          commonSearch:true,
+          pageSize:15,//每页显示条数
+          showExport:false,
+          showColumns:true,
+          columns: [
+              {
+                  field: 'state',
+                  checkbox: true,
+                  align: 'center',
+                  valign: 'middle'
+
+              }, {
+                  field: 'name',
+                  title: '名称[敏感类型]',
+                  sortable: true,
+                  align: 'left',
+                  operate: 'LIKE %...%'
+              },{
+                  field: 'level',
+                  title: '危险级别',
+                  sortable: true,
+                  align: 'center',
+                  // operate: 'LIKE %...%'
+                  searchList: $.getJSON('/admin/sensitive/classify/getLevelList')
+              },{
+                  field: 'create_time',
+                  title: '创建时间',
+                  align: 'center',
+                  sortable: true,
+                  formatter: Table.api.formatter.datetime, 
+                  operate: 'RANGE', 
+                  addclass: 'datetimerange',
+              }, {
+                  field: 'status',
+                  title: '状态',
+                  align: 'center',
+                  searchList: {"1":'正常',"0":'禁用'}, 
+                  sortable: true,
+                  formatter: Table.api.formatter.status, 
+              }, {
+                  field: 'operate',
+                  title: '操作',
+                  align: 'center',
+                  table: table,
+                  events: Table.api.events.operate,
+                  formatter: Table.api.formatter.operate
+              }
+          ],
+          treeShowField: 'name',
+	      parentIdField: 'pid',
+	      onLoadSuccess: function(data) {
+	        table.treegrid({
+	          // initialState: 'collapsed',
+	          treeColumn: 1,
+	          // expanderExpandedClass: 'glyphicon glyphicon-minus',
+	          // expanderCollapsedClass: 'glyphicon glyphicon-plus',
+	          onChange: function() {
+	            table.bootstrapTable('resetWidth');
+	          }
+	        });
+	      },
+          queryParams: function (params) {
+              // return params;
+              //这里可以追加搜索条件
+              var filter = JSON.parse(params.filter);
+              var op = JSON.parse(params.op);
+              var sort = params.sort;
+              
+              params.sort = 'sc.'+sort;
+              
+              $.each(op, function(i,value) {
+                op['sc.'+i] = value;
+                delete op[i];
+              });
+              $.each(filter, function(i,value) {
+                filter['sc.'+i] = value;
+                  
+                delete filter[i];
+
+              });
+
+              params.filter = JSON.stringify(filter);
+              params.op = JSON.stringify(op);
+              return params;
+          },
+      });
+            
+      // 为表格绑定事件
+      Table.api.bindevent(table);
+
+  });
+
+</script>

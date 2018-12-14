@@ -1,0 +1,92 @@
+{include file="layout/top" /}
+
+
+<div class="callout callout-success">
+    <h4>提示!</h4>
+    规则名称请仔细填写，包含大小写的区别
+</div>
+<form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
+    
+    <div class="form-group">
+        <label for="name" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>父级:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class="form-control select2  col-xs-12 col-sm-2" name="row[pid]" style="border-radius:0px;" data-rule="required">
+                <option selected="selected" value="0">根节点</option>
+                  {volist name="nodelist" id="vo"}
+                    <option value="{$vo.id}">&nbsp;&nbsp;{$vo.name}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>分类名称:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input type="text" class="form-control" id="name" name="row[name]" placeholder="分类名称" value="" data-rule="required" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>危险级别:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select class="form-control select2  col-xs-12 col-sm-2" name="row[level]" style="border-radius:0px;" data-rule="required">
+                <!-- <option selected="selected" value="0">不设置</option> -->
+                {volist name="levellist" id="vo"}
+                    <option value="{$key}">&nbsp;&nbsp;{$vo}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="content" class="control-label col-xs-12 col-sm-2"><font color="#FF0000">*</font>状态:</label>
+        <div class="col-xs-12 col-sm-8">
+            <label>
+                <input type="radio" name="row[status]" value="1" class="flat-red" checked>
+                启用
+            </label>
+            <label>
+                <input type="radio" name="row[status]" value="0" class="flat-red">
+                停用
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        
+    </div>
+    <div class="form-group hidden layer-footer">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed ">确定</button>
+            <button type="reset" class="btn btn-default btn-embossed">重置</button>
+        </div>
+    </div>
+</form>
+
+
+
+{include file="layout/js" /}
+
+
+
+<!-- Select2 -->
+<link rel="stylesheet" href="__LIBS__/select2/dist/css/select2.min.css">
+<!-- Select2 -->
+<script src="__LIBS__/select2/dist/js/select2.full.min.js"></script>
+
+
+<script type="text/javascript">
+
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2();
+    })
+</script>
+</body>
+</html>

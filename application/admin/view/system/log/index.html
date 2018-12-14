@@ -1,0 +1,156 @@
+<style type="text/css">
+  .box-line{
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+  }
+</style>
+<div class="row">
+	<div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">日志列表</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <!-- <h3>
+                日志列表
+              </h3> -->
+              <div id="toolbar">
+                  <button class="btn btn-default btn-refresh">
+                      <i class="fa fa-refresh"></i>刷新
+                  </button>
+              </div>
+              <table id="table" >
+              </table>
+            </div>
+          </div>
+          <!-- /. box -->
+        </div>
+      </div>
+
+<!-- Select2 -->
+<link rel="stylesheet" href="__LIBS__/select2/dist/css/select2.min.css">
+<!-- Select2 -->
+<script src="__LIBS__/select2/dist/js/select2.full.min.js"></script>
+
+<script>
+  $(function () {
+    //初始化一些操作（非必须） 该方法一定要写在 Table.api.init 之前
+      // 初始化表格参数配置
+      Table.api.init({
+          pk:'id',
+          sortName:'id',
+          extend: {
+              index_url: 'log/index',
+              add_url: '',
+              edit_url: '',
+              del_url: '',
+              multi_url: '',
+              text:{
+                  'add_text':'',
+                  'edit_text':'查看'
+              }
+          }
+      });
+      var table = $('#table');
+
+      // 初始化表格
+      table.bootstrapTable({
+          url: $.fn.bootstrapTable.defaults.extend.index_url,
+          sortName:'id',
+          detailView:false,
+          searchFormVisible: false, //是否始终显示搜索表单
+          commonSearch:true,
+          pageSize:15,//每页显示条数
+          showExport:false,
+          showColumns:true,
+          columns: [
+              {
+                  field: 'state',
+                  checkbox: true,
+                  align: 'center',
+                  valign: 'middle'
+
+              }, {
+                  field: 'user_name',
+                  title: '操作人',
+                  sortable: true,
+                  align: 'center',
+                  // operate: 'LIKE %...%',
+                  searchList: $.getJSON('user/getUserList?search=StatTemplate&id=1')
+              }, {
+                  field: 'title',
+                  title: '标题',
+                  align: 'center',
+                  operate: 'LIKE %...%',
+              }, {
+                  field: 'url',
+                  title: '操作地址',
+                  align: 'center',
+                  operate: false,
+                  formatter: Table.api.formatter.url
+              }, {
+                  field: 'create_time',
+                  title: '操作时间',
+                  align: 'center',
+                  sortable: true,
+                  formatter: Table.api.formatter.datetime, 
+                  operate: 'RANGE', 
+                  addclass: 'datetimerange',
+              }, {
+                  field: 'useragent',
+                  title: 'UserAgent',
+                  align: 'center',
+                  operate:false
+              },{
+                  field: 'ip',
+                  title: 'IP',
+                  sortable: true,
+                  align: 'center',
+              }
+          ],
+          queryParams: function (params) {
+              //这里可以追加搜索条件
+              var filter = JSON.parse(params.filter);
+              var op = JSON.parse(params.op);
+              var sort = params.sort;
+              if(sort == 'user_name'){
+                params.sort = 'u.name'
+              }else{
+                params.sort = 'sl.'+sort;
+              }
+              
+              $.each(op, function(i,value) {
+                if(i == 'user_name'){
+                  op['u.id'] = value
+                }else{
+                  op['sl.'+i] = value;
+                }
+                delete op[i];
+              });
+              $.each(filter, function(i,value) {
+                if(i == 'user_name'){
+                  filter['u.id'] = value
+                }else{
+                  filter['sl.'+i] = value;
+                }
+                delete filter[i];
+
+              });
+
+              params.filter = JSON.stringify(filter);
+              params.op = JSON.stringify(op);
+              return params;
+          },
+      });
+            
+      // 为表格绑定事件
+      Table.api.bindevent(table);
+
+  });
+
+$('select').select2();
+</script>

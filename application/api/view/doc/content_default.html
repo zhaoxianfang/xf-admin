@@ -1,0 +1,86 @@
+<div id="project">
+  <div class="pull-left">
+    <h2>{$sys_title} | {$app_name|default="未知程序"} | API文档</h2>
+  </div>
+  <div class="clearfix"></div>
+</div>
+    <div id="header">
+        <p>
+        
+            此文档为{$sys_title}官方网站提供数据接口，仅供参考，开发者可参考开发手册进行API接口开发。
+            
+            <br/><br/>
+        <hr/>
+          <h2>API 调用示例</h2>
+             https://域名/api/sync/test/index.html   说明：  sync:应用名称   test:模块   index:调用方法
+        
+        <hr/>
+
+        <div id="project">
+          <div class="pull-left">
+            <h2>数据格式说明</h2>
+                <table>
+                  <thead>
+                  <tr>
+                    <th>data_type的值</th>
+                    <th>说明</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td>0</td>
+                        <td>字符</td>
+                      </tr>
+                      <tr>
+                        <td>1</td>
+                        <td>数字</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>数组</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>文件</td>
+                      </tr>
+                      
+                  </tbody>
+              </table>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+        
+        <div id="project">
+          <div class="pull-left">
+            <h2>错误码规范</h2>
+            code （错误码编号） 第1-2位（错误模块）,第3-5位（错误代码）<br/><br/>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+         
+        <table>
+            <thead>
+            <tr>
+              <th>code</th>
+              <th>msg</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {volist name="code_list" id='vo'}
+                <tr>
+                  <td>{$key}</td>
+                  <td>{$vo}</td>
+                </tr>
+            {/volist}
+            </tbody>
+        </table>
+            
+        </p>
+</div>
+<div id="generator">
+      <div class="content">
+        Copyright ©2018 <a href="http://www.kunming.cn/" target=" _blank">昆明信息港</a>
+      </div>
+      <div class="author">撰写:赵先方(1748331509@qq.com)</div>
+</div>

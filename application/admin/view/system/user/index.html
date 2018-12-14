@@ -1,0 +1,174 @@
+<div class="row">
+	<div class="col-md-12">
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">用户列表</h3>
+              <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <div id="toolbar">
+                  <button class="btn btn-info btn-refresh">
+                      <i class="fa fa-refresh"></i>刷新
+                  </button>
+                  <button class="btn btn-success  btn-add">
+                    <i class="fa fa-plus"></i>添加
+                  </button>
+
+                  <button class="btn btn-success  btn-edit">
+                      <i class="fa fa-pencil"></i>编辑
+                  </button>
+
+                  <button class="btn btn-danger btn-del" data-success="" >
+                      <i class="fa fa-trash"></i>删除
+                  </button>
+              </div>
+              <table id="table" >
+              </table>
+              <!-- /.mail-box-messages -->
+            </div>
+            <!-- /.box-body -->
+
+          </div>
+          <!-- /. box -->
+        </div>
+    </div>
+
+
+<script>
+  $(function () {
+    //初始化一些操作（非必须） 该方法一定要写在 Table.api.init 之前
+      // 初始化表格参数配置
+      Table.api.init({
+          pk:'id',
+          sortName:'id',
+          extend: {
+              index_url: 'user/index',
+              add_url: 'user/add',
+              edit_url: 'user/edit',
+              del_url: 'user/del',
+              multi_url: '',
+              text:{
+                  'add_text':'',
+                  'edit_text':''
+              }
+          }
+      });
+      var table = $('#table');
+
+      // 初始化表格
+      table.bootstrapTable({
+          url: $.fn.bootstrapTable.defaults.extend.index_url,
+          sortName:'id',
+          detailView:false,
+          searchFormVisible: false, //是否始终显示搜索表单
+          commonSearch:true,
+          pageSize:15,//每页显示条数
+          showExport:false,
+          showColumns:true,
+          columns: [
+              {
+                  field: 'state',
+                  checkbox: true,
+                  align: 'center',
+                  valign: 'middle'
+
+              }, {
+                  field: 'name',
+                  title: '姓名',
+                  sortable: true,
+                  align: 'center',
+                  operate: 'LIKE %...%',
+                  searchList: $.getJSON('user/getUserList')
+              }, {
+                  field: 'nickname',
+                  title: '昵称',
+                  align: 'center',
+                  operate: 'LIKE %...%',
+              }, {
+                  field: 'mobile',
+                  title: '手机号',
+                  align: 'center',
+                  operate: 'LIKE %...%',
+                  // formatter: Table.api.formatter.url
+              }, {
+                  field: 'group_name',
+                  title: '所属分组',
+                  align: 'center',
+                  // operate: false,
+                  searchList: $.getJSON('group/getGroupList')
+                  // formatter: Table.api.formatter.url
+              }, {
+                  field: 'last_login_time',
+                  title: '登录时间',
+                  align: 'center',
+                  sortable: true,
+                  formatter: Table.api.formatter.datetime, 
+                  operate: 'RANGE', 
+                  addclass: 'datetimerange',
+              }, {
+                  field: 'status',
+                  title: '用户状态',
+                  align: 'center',
+                  searchList: {"1":'正常',"0":'禁用'}, 
+                  sortable: true,
+                  formatter: Table.api.formatter.status, 
+              }, {
+                  field: 'operate',
+                  title: '操作',
+                  align: 'center',
+                  table: table,
+                  events: Table.api.events.operate,
+                  formatter: Table.api.formatter.operate
+              }
+          ],
+          queryParams: function (params) {
+            // return params;
+              //这里可以追加搜索条件
+              var filter = JSON.parse(params.filter);
+              var op = JSON.parse(params.op);
+              var sort = params.sort;
+              if(sort == 'group_name'){
+                params.sort = 'ag.name'
+              }else{
+                params.sort = 'u.'+sort;
+              }
+              
+              $.each(op, function(i,value) {
+                if(i == 'group_name'){
+                  op['u.id'] = value
+                }else{
+                  if(i == 'name'){
+                    op['u.id'] = value
+                  }else{
+                    op['u.'+i] = value;
+                  }
+                }
+                delete op[i];
+              });
+              $.each(filter, function(i,value) {
+                if(i == 'group_name'){
+                  filter['ag.id'] = value
+                }else{
+                  if(i == 'name'){
+                    filter['u.id'] = value
+                  }else{
+                    filter['u.'+i] = value;
+                  }
+                }
+                delete filter[i];
+
+              });
+
+              params.filter = JSON.stringify(filter);
+              params.op = JSON.stringify(op);
+              return params;
+          },
+      });
+            
+      // 为表格绑定事件
+      Table.api.bindevent(table);
+
+  });
+
+</script>

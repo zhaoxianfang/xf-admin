@@ -1,0 +1,222 @@
+
+
+ <!-- Input addon -->
+
+<div class="box box-info">
+    <div class="box-header with-border">
+      <h3 class="box-title">远程截图demo 只需填写网址即可，其他项都是附加项</h3>
+    </div>
+	<form role="form"  id="screen_url" class="form-horizontal form-ajax" action="{:url('screen')}" method="post">
+    	<div class="box-body">
+                <!-- text input -->
+                <!-- input states -->
+                <div class="form-group has-success">
+                  <label  class="control-label col-xs-12 col-sm-2"> 截图网址</label>
+                  <div class="col-xs-12 col-sm-8">
+	                  <input type="text" class="form-control" name='row[link]' placeholder="http://">
+	                  <span class="help-block">带http或者https 前缀</span>
+	              </div>
+                </div>
+
+                <!-- 延时 -->
+                <div class="form-group has-success">
+                  	<label class="control-label col-xs-12 col-sm-2" for="time">延迟时间</label>
+                  	<div class="col-xs-12 col-sm-8">
+	                	<select class="form-control " name='row[delay]' >
+		                    <option value="3">3秒</option>
+		                    <option value="4">4秒</option>
+		                    <option value="5" selected>5秒</option>
+		                    <option value="10">10秒</option>
+	                	</select>
+	                	<span class="help-block">设置延迟时间是因为有些页面是通过js渲染的，需要等待页面渲染</span>
+	              </div>
+                </div>
+
+                <!-- 生成文件类型 -->
+                <div class="form-group has-success">
+                  <label class="control-label col-xs-12 col-sm-2" for="time">生成文件类型</label>
+                  <div class="col-xs-12 col-sm-8">
+	                  <select class="form-control "  name='row[file_ext]' >
+	                    <option value="" disabled>&nbsp;&nbsp;&nbsp;&nbsp;文件</option>
+	                    <option value="pdf">pdf</option>
+	                    <option value="" disabled>&nbsp;&nbsp;&nbsp;&nbsp;图片</option>
+	                    <option value="jpg" selected>jpg</option>
+	                    <option value="png">png</option>
+	                  </select>
+	                  <span class="help-block">目前只支持pdf文件和图片格式</span>
+	              </div>
+                </div>
+	
+				<div class="form-group has-success">
+                	<label  class="control-label col-xs-12 col-sm-2"> 背景色</label>
+                	<div class="col-xs-12 col-sm-8">
+	                	<input type="text" class="form-control my-colorpicker"  name='row[background_color]' placeholder="#ff0000">
+	                	<span class="help-block">设置生成文件的背景色</span>
+	            	</div>
+                </div>
+
+                <div class="form-group has-success">
+                	<label  class="control-label col-xs-12 col-sm-2"> PDF文件头信息</label>
+                	<div class="col-xs-12 col-sm-8">
+	                	<input type="text"  name='row[pdf_header]' class="form-control" placeholder="头信息">
+	                	<span class="help-block">只有文件类型选择PDF时候才有效</span>
+	            	</div>
+                </div>
+
+                <div class="form-group has-success">
+                	<label  class="control-label col-xs-12 col-sm-2"> PDF文件尾信息</label>
+                	<div class="col-xs-12 col-sm-8">
+	                	<input type="text" class="form-control"  name='row[pdf_footer]' placeholder="尾信息">
+	                	<span class="help-block">只有文件类型选择PDF时候才有效</span>
+	            	</div>
+                </div>
+
+                <div class="form-group has-success">
+                	<label  class="control-label col-xs-12 col-sm-2"> PDF文件大小</label>
+                	<div class="col-xs-12 col-sm-8 row">
+                		<div class="col-md-6 col-sm-6">
+	                		<input type="number" class="form-control col-md-6"  name='row[pdf_width]' placeholder="PDF截图纸张宽度 单位：cm">
+                		</div>
+                		<div class="col-md-6 col-sm-6">
+	                		<input type="number" class="form-control col-md-6"  name='row[pdf_height]' placeholder="PDF截图纸张高度 单位：cm">
+                		</div>
+                		<span class="help-block" style="padding-left: 15px;">只有文件类型选择PDF时候才有效 单位：cm</span>
+	                	
+	            	</div>
+                </div>
+
+                <div class="form-group has-success">
+                	<label  class="control-label col-xs-12 col-sm-2"> 图片截图大小</label>
+                	<div class="col-xs-12 col-sm-8 row">
+                		<div class="col-md-3 col-sm-3">
+	                		<input type="number" class="form-control col-md-6" name='row[img_width]' placeholder="宽度 单位：px">
+                		</div>
+                		<div class="col-md-3 col-sm-3">
+	                		<input type="number" class="form-control col-md-6" name='row[img_height]'  placeholder="高度 单位：px">
+                		</div>
+                		<div class="col-md-3 col-sm-3">
+	                		<input type="number" class="form-control col-md-6" name='row[img_top]'  placeholder="top 单位：px">
+                		</div>
+                		<div class="col-md-3 col-sm-3">
+	                		<input type="number" class="form-control col-md-6" name='row[img_left]'  placeholder="left 单位：px">
+                		</div>
+                		
+                		<span class="help-block" style="padding-left: 15px;">只有文件类型选择图片时候才有效 单位 px</span>
+	                	
+	            	</div>
+                </div>
+                
+	    </div>
+	    <!-- /.box-body -->
+
+	    <div class="box-footer">
+	    	<div class="form-group">
+            	<label  class="control-label col-xs-12 col-sm-2"></label>
+            	<div class="col-xs-12 col-sm-8">
+			    <button type="button" id="submit_btn" class="btn btn-info">开始截图</button>
+			    <!-- <button type="submit" class="btn btn-info pull-right">Sign in</button> -->
+            	</div>
+            </div>
+		</div>
+    </form>
+</div>
+<!-- /.box -->
+
+
+<!-- bootstrap color picker -->
+<script src="__LIBS__/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+<!-- layer -->
+<script src="__LAYER__/layer.js"></script>
+
+<!-- iCheck for checkboxes and radio inputs -->
+<link rel="stylesheet" href="__ICHECK__/all.css">
+<!-- iCheck 1.0.1 -->
+<script src="__ICHECK__/icheck.min.js"></script>
+
+<script type="text/javascript">
+
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
+
+    //Colorpicker
+    $('.my-colorpicker').colorpicker()
+
+  //截图
+  $("#submit_btn").click(function(){
+      console.log('...')
+      layer.msg('正在处理中....');
+      var setid = $(this).data('id');
+      var url = $("form").attr("action");
+      var formdata = $("form").serializeArray();
+      my.ajax(url,formdata,function(success) {
+
+      	if(success.code == 1){
+      		layer.msg(success.msg, {icon: 1});
+            //弹出显示
+      		  showImg(success.url,success.type);
+      	}else{
+      		layer.msg(success.msg, {icon: 2});
+      	}
+        
+      },function(error) {
+          layer.msg('截图失败', {icon: 2});
+      });
+  }); 
+
+function showImg(url,type){  
+    if(type == 'image'){
+      var html = "<img src='" + url + "' />";    
+    }else{
+      var html = "<a href = 'javascript:;'><button  onclick='downloadfile(this)'  data-url='"+url+"' type='button' class='btn btn-info' style='margin:150px;auto;'>下载文件</button></a>";    
+    }
+    layer.open({    
+        type: 1,    
+        shade: false,    
+        title: false, //不显示标题    
+        // area:['auto','auto'],    
+        area: my.window.width() > 893 ? ['893px', '600px'] : ['200px', '250px'], //弹出层大小
+        // area: [img.width + 'px', img.height+'px'],    
+        // area: ['400px', '500px'],    
+        content: html, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响    
+        cancel: function () {    
+            //layer.msg('图片查看结束！', { time: 5000, icon: 6 });    
+        }    
+    });    
+}  
+// $('#downloadfile').click(function(){
+function downloadfile(obj) {
+    var fileUrl = $(obj).data('url');
+    console.log(fileUrl)
+    openDownloadDialog(fileUrl, '截图.pdf')
+}
+
+/**
+ * 直接下载
+ * 通用的打开下载对话框方法，没有测试过具体兼容性 
+ * @param url 下载地址，也可以是一个blob对象，必选
+ * @param saveName 保存文件名，可选
+ */
+function openDownloadDialog(url, saveName)
+{
+   if(typeof url == 'object' && url instanceof Blob)
+   {
+    url = URL.createObjectURL(url); // 创建blob地址
+   }
+   var aLink = document.createElement('a');
+   aLink.href = url;
+   aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+   var event;
+   if(window.MouseEvent) event = new MouseEvent('click');
+   else
+   {
+    event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+   }
+   aLink.dispatchEvent(event);
+}
+
+
+</script>

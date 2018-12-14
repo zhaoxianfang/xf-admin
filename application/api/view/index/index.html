@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{$sys_title}</title>
+    <link href="__API__/module/api/css/api_home.css" rel="stylesheet">
+    <link href="__COMMON__/css/face.css" rel="stylesheet">
+	<link rel="icon" href="__COMMON__/img/kmxxg.ico" >
+<style type="text/css">
+	.nothing{
+		/*background-color: #F00;*/
+	    width: 140px;
+	    height: 100px;
+	    position: absolute;
+	    left: 43%;
+	    top: 38%;
+	    margin: -50px 0 0 -50px;
+	}
+</style>
+
+</head>
+<body>
+    <div class="api-head">
+    	<div class="head-title">
+    		<img src="__COMMON__/img/logo_small.png" alt="Logo">
+    		<span>{$sys_title}&nbsp;&nbsp;|&nbsp;&nbsp;接口文档</span>
+    	</div>
+    </div>
+    <div class="item-box">
+    	{volist name="app_list" id="app"}
+	        <div class="mp_kind_mod_bd group">
+	            <div class="mp_kind_wrp">
+	                <div class="mp_kind_box">
+	                    <dl class="mp_kind">
+	                        <dt class="name">
+	                            <span class="icon_mp_kind service">
+	                            <img class="app_img" src="{$app.app_cover}" alt="" style="height: 90px;width: 90px;">
+	                            </span>
+	                            {$app.app_name}
+	                        </dt> 
+	                        <dd>
+	                        	{empty name="app.description"}
+	                        		管理员没有填写该应用的描述。
+	                        	{else /}
+	                        		{$app.description}
+	                        	{/empty}
+	                        </dd>
+	                    </dl> 
+	                    <div class="mp_option_box">
+	                        <a href="__PUBLIC__{$app.url}" class="btn btn_primary">查看详情</a> 
+	                        <div class="mp_option_links">
+	                            <a href="{$app.url}" >开发文档</a> |
+	                            <a href="{$app.url}" >开发文档</a>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div> 
+	        </div>
+		{/volist}
+		{empty name="app_list"}
+		<div class="mp_kind_mod_bd group">
+			<div class="mp_kind_wrp">
+				<div class="nothing">
+					<div class="emoji  emoji--sad">
+					  <div class="emoji__face">
+					    <div class="emoji__eyebrows"></div>
+					    <div class="emoji__eyes"></div>
+					    <div class="emoji__mouth"></div>
+					  </div>
+					</div>
+					没有公开的API文档...
+				</div>
+			</div>
+		</div>
+		{/empty}
+        
+    </div>
+</body>
+</html>

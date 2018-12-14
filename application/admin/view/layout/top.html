@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{$config.name|default='后台管理'}</title>
+  <link rel="icon" href="__PUBLIC__/myfavicon.ico" >
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- X-PJAX-Version头版本 -->
+  <meta http-equiv="x-pjax-version" content="v123">
+  <link rel="stylesheet" href="__BS__/css/bootstrap.min.css" />
+  <!-- 字体库 -->
+  <link rel="stylesheet" href="__FONT__/css/font-awesome.min.css" />
+  <!-- 小图标 -->
+  <link rel="stylesheet" href="__ICONS__/css/ionicons.min.css" />
+  <!-- 主题 -->
+  <link rel="stylesheet" href="__ADMINLTE__/css/AdminLTE.min.css"/>
+  <!-- 皮肤 -->
+  <!-- <link rel="stylesheet" href="__ADMINLTE__/css/skins/skin-blue.min.css"> -->
+  <link rel="stylesheet" href="__ADMINLTE__/css/skins/_all-skins.min.css"/>
+  <!-- bootstrap-table -->
+  <link rel="stylesheet" href="__LIBS__/bootstrap-table/src/bootstrap-table.css" />
+  <link rel="stylesheet" href="__LIBS__/bootstrap-table/src/edit/bootstrap-editable.css">
+  <link rel="stylesheet" href="__LIBS__/nice-validator/dist/jquery.validator.css" />
+  <link rel="stylesheet" href="__LIBS__/bootstrap-table/src/edit/bootstrap-editable.css">
+  <link rel="stylesheet" href="__LIBS__/jquery-treegrid/css/jquery.treegrid.css">
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="__LIBS__/select2/dist/css/select2.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="__ICHECK__/all.css">
+     <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="__LIBS__/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+
+  <!-- jquery.mloading -->
+  <link rel="stylesheet" href="__LIBS__/jquery_mloading/jquery.mloading.css" />
+  <!-- 时间 -->
+  <link rel="stylesheet" href="__LIBS__/daterangepicker/daterangepicker.css" />
+  <!-- <link rel="stylesheet" href="__COMMON__/css/backend.css"> -->
+  <!-- 皮肤 和 layerfooter 和 一些其他的修复与优化 -->
+  <link rel="stylesheet" href="__COMMON__/css/my.css" />
+  <!-- jQuery 3 -->
+  <script src="__JQ__/jquery.min.js"></script>
+  <!-- toastr -->
+  <link rel="stylesheet" href="__LIBS__/toastr/build/toastr.min.css" />
+
+<script type="text/javascript">
+
+    var sys_config = $.parseJSON( '{$config|default=""|json_encode}'.replace(/&quot;/ig,'"').replace(/"{/ig,'{').replace(/}"/ig,'}') );
+
+</script>
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="__IE__/js/html5shiv.min.js"></script>
+  <script src="__IE__/js/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"> -->
+</head>
