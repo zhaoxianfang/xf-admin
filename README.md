@@ -1,6 +1,7 @@
-xf-admin 通用后台管理系统
+# xf-admin
+thinkphp 封装后台管理系统
 ===============
-> PHP 版本必须大于7、
+> PHP 版本必须大于7
 > ES 版本 6.4
 > ThinkPHP 版本 >= 5.1
 
@@ -8,8 +9,30 @@ xf-admin 通用后台管理系统
 | --- | --- |
 |  赵先方  |  1748331509@qq.com   |
 
+|   包含功能 |   模块&插件 |
+| --- | --- |
+| Pjax | Pjax  |
+| 表格 | bootstrap-table 插件封装  |
+| QQ登录 | zxf\Qqlogin  |
+| 微博登录 | zxf\sina  |
+| 逆波兰式计算(RPN) | util\sina  |
+| redis | util\Redis  |
+| ElasticSearch | Elasticsearch\ClientBuilder,app\common\elastic\service\Doc  |
+| 邮件发送 | util\PHPmailer  |
+| 拼音生成 | util\Pinyin  |
+| Rsa加解密 | util\Rsa  |
+| Rsa加解密 | util\Rsa  |
+| 地区五级联动 | -- |
+| 动态网页截图 | -- |
 
-创建时间：2018/09/25
+##联系我
+[![avatar](http://wpa.qq.com/pa?p=2:1748331509:51)](http://wpa.qq.com/msgrd?v=3&uin=1748331509&site=qq&menu=yes)
+
+### composer 下载安装
+composer create-project zxf/xfadmin xf-admin
+
+
+创建时间：2018/12/14
 
 ***
 

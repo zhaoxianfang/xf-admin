@@ -1,22 +1,25 @@
 {
-    "name": "topthink/think",
-    "description": "the new thinkphp framework",
+    "name": "zxf/xfadmin",
+    "description": "基于thinkphp开发的管理后台",
     "type": "project",
     "keywords": [
-        "framework",
-        "thinkphp",
-        "ORM"
+        "xfadmin",
+        "php",
+        "zxf",
+        "zhaoxianfang",
+        "tools",
+        "code"
     ],
-    "homepage": "http://thinkphp.cn/",
+    "homepage": "http://www.itzxf.com",
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "liu21st",
-            "email": "liu21st@gmail.com"
+            "name": "zhaoxianfang",
+            "email": "1748331509@qq.com"
         }
     ],
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.0.0",
         "topthink/framework": "5.1.*",
         "topthink/think-captcha": "^2.0",
         "phpoffice/phpexcel": "^1.8",
@@ -31,6 +34,7 @@
         "think-path": "thinkphp"
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "process-timeout": 300
     }
 }
